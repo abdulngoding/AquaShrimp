@@ -6,9 +6,14 @@ Salah password 3 kali berturut-turut -> login dikunci 30 detik untuk alamat IP t
 
 import hashlib
 import hmac
+import os
 import time
 
 import streamlit as st
+
+# Alamat logo dihitung dari lokasi file ini, jadi tetap benar di laptop maupun di hosting.
+LOGO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "logo.png")
+ADA_LOGO = os.path.exists(LOGO)
 
 MAKS_PERCOBAAN = 3
 DETIK_KUNCI = 30
@@ -50,7 +55,8 @@ def _periksa(username, password):
 def tampil_login():
     kolom = st.columns([1, 2, 1])[1]
     with kolom:
-        st.image("static/logo.png", width=120)
+        if ADA_LOGO:
+            st.image(LOGO, width=120)
         st.title("AquaShrimp SIA")
         st.caption("Sistem Informasi Akuntansi Tambak Udang. Silakan masuk.")
 

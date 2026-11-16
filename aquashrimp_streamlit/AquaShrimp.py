@@ -12,7 +12,7 @@ import akses
 from menu import (buku_besar, dashboard, jurnal_umum, laba_rugi, neraca_saldo,
                   penerimaan_kas, pengeluaran_kas, persediaan, reset_data, saldo_awal)
 
-st.set_page_config(page_title="AquaShrimp SIA", page_icon="static/logo.png", layout="wide")
+st.set_page_config(page_title="AquaShrimp SIA", page_icon=akses.LOGO if akses.ADA_LOGO else None, layout="wide")
 
 if not akses.sudah_masuk():
     akses.tampil_login()
@@ -34,7 +34,8 @@ HALAMAN = [
 halaman = st.navigation(HALAMAN)
 
 with st.sidebar:
-    st.image("static/logo.png", width=90)
+    if akses.ADA_LOGO:
+        st.image(akses.LOGO, width=90)
     st.caption(f"Masuk sebagai **{st.session_state['user']}**")
     if st.button("Keluar", width="stretch"):
         akses.keluar()
